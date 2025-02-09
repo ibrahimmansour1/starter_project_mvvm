@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:starter_project/features/auth/domain/entities/user_entity.dart';
 
 import '../../../../../core/errors/exceptions.dart';
 import '../../../data/repos/auth_repo.dart';
+import '../../../domain/entities/user_entity.dart';
 
 part 'auth_state.dart';
 

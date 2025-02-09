@@ -1,4 +1,4 @@
-import 'package:starter_project/features/auth/domain/entities/user_entity.dart';
+import 'package:starter_project_mvvm/features/auth/domain/entities/user_entity.dart';
 
 abstract class AuthRepository {
   Future<UserEntity> login(String email, String password);

@@ -2,32 +2,32 @@ import 'dart:convert';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class UserModel {
-  final String id;
+  final String username;
   final String email;
   final String name;
-  final String? avatar;
+  final String? role;
   UserModel({
-    required this.id,
+    required this.username,
     required this.email,
     required this.name,
-    this.avatar,
+    this.role,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
+      'username': username,
       'email': email,
       'name': name,
-      'avatar': avatar,
+      'role': role,
     };
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      id: map['id'] as String,
+      username: map['username'] as String,
       email: map['email'] as String,
       name: map['name'] as String,
-      avatar: map['avatar'] != null ? map['avatar'] as String : null,
+      role: map['role'] != null ? map['role'] as String : null,
     );
   }
 

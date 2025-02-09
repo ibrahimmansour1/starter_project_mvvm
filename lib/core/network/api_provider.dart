@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:starter_project/core/constants/api_constants.dart';
+import 'package:starter_project_mvvm/core/constants/api_constants.dart';
 
 import '../errors/exceptions.dart';
 import '../utils/secure_storage_helper.dart';

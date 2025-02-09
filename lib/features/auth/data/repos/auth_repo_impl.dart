@@ -29,7 +29,7 @@ class AuthRepositoryImpl implements AuthRepository {
       final response = await _apiProvider.post(
         ApiConstants.login,
         data: {
-          'email': email,
+          'username': email,
           'password': password,
         },
       );
