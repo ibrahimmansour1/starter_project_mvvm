@@ -1,9 +1,10 @@
-import 'package:starter_project_mvvm/features/auth/domain/entities/user_entity.dart';
+import '../../domain/entities/sign_in_response_entity/sign_in_response_entity.dart';
 
 abstract class AuthRepository {
-  Future<UserEntity> login(String email, String password);
-  Future<UserEntity> register(String email, String password, String name);
-  Future<UserEntity?> getCurrentUser();
+  Future<SignInResponseEntity> login(String email, String password);
+  Future<SignInResponseEntity> register(
+      String email, String password, String name);
+  Future<SignInResponseEntity?> getCurrentUser();
   Future<void> logout();
   Future<void> updateProfile(Map<String, dynamic> data);
 }

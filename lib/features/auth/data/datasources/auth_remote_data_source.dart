@@ -18,7 +18,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     final response = await apiProvider.post(
       ApiConstants.login,
       data: {
-        'email': email,
+        'username': email,
         'password': password,
       },
     );
@@ -31,7 +31,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     final response = await apiProvider.post(
       ApiConstants.register,
       data: {
-        'email': email,
+        'username': email,
         'password': password,
         'name': name,
       },

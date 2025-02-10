@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import '../../../../core/constants/api_constants.dart';
 import '../../../../core/errors/exceptions.dart';
 import '../../../../core/network/api_provider.dart';
 import '../../../../core/network/network_info.dart';
 import '../../../../core/utils/secure_storage_helper.dart';
-import '../../domain/entities/user_entity.dart';
+import '../../domain/entities/sign_in_response_entity/sign_in_response_entity.dart';
 import 'auth_repo.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -20,7 +22,7 @@ class AuthRepositoryImpl implements AuthRepository {
         _networkInfo = networkInfo;
 
   @override
-  Future<UserEntity> login(String email, String password) async {
+  Future<SignInResponseEntity> login(String email, String password) async {
     if (!await _networkInfo.isConnected) {
       throw ServerException('No internet connection');
     }
@@ -34,12 +36,15 @@ class AuthRepositoryImpl implements AuthRepository {
         },
       );
 
-      await _secureStorage.saveString(
-        ApiConstants.tokenKey,
-        response.data['token'],
-      );
+      if (response.data['token'] != null) {
+        await _secureStorage.saveString(
+          ApiConstants.tokenKey,
+          response.data['token'] ?? '',
+        );
+      }
+      log('Login Response: ${response.data}');
 
-      final user = UserEntity.fromJson(response.data['user']);
+      final user = SignInResponseEntity.fromJson(response.data['user']);
       await _secureStorage.saveMap(ApiConstants.userKey, user.toJson());
 
       return user;
@@ -49,11 +54,11 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<UserEntity> getCurrentUser() async {
+  Future<SignInResponseEntity> getCurrentUser() async {
     try {
       final userData = await _secureStorage.getMap(ApiConstants.userKey);
       if (userData != null) {
-        return UserEntity.fromJson(userData);
+        return SignInResponseEntity.fromJson(userData);
       }
       throw CacheException('No user data found');
     } catch (e) {
@@ -71,7 +76,8 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<UserEntity> register(String email, String password, String name) {
+  Future<SignInResponseEntity> register(
+      String email, String password, String name) {
     // TODO: implement register
     throw UnimplementedError();
   }
